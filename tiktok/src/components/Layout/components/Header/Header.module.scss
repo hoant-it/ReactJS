@@ -13,6 +13,7 @@
   height: 100%;
   //   width: var(--default-layout-width,1105px);truong hop ko co bien --default-layout-width van lay gia tri 1105px
   width: var(--default-layout-width);
+  padding: 0 var(--default-layout-horizontal-space);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,11 +87,34 @@
   }
 }
 
+//Action
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .more-btn {
+  cursor: pointer;
   padding: 4px 8px;
   font-size: 2rem;
   margin-left: 28px;
   background: transparent;
 }
 
+.action-btn {
+  font-size: 2.2rem;
+  color: #161823;
+  background-color: transparent;
+  padding: 4px 12px;
+  cursor: pointer;
+}
 
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 12px;
+  cursor: pointer;
+}
