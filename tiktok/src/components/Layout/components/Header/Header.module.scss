@@ -18,8 +18,7 @@
   justify-content: space-between;
   //   background-color: #ccc;
 }
-.logo {
-}
+
 .search,
 .search-result {
   width: 361px;
@@ -57,8 +56,6 @@
     border-color: rgba(22, 24, 35, 0.2);
   }
 }
-.search-result {
-}
 .search-title {
   color: rgba(22, 24, 35, 0.5);
   font-size: 1.4rem;
@@ -87,6 +84,13 @@
   &:active {
     background-color: rgba(22, 24, 35, 0.06);
   }
+}
+
+.more-btn {
+  padding: 4px 8px;
+  font-size: 2rem;
+  margin-left: 28px;
+  background: transparent;
 }
 
 
