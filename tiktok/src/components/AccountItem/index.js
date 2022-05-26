@@ -21,5 +21,4 @@ function AccountItem({ data }) {
     </Link>
   );
 }
-
 export default AccountItem;

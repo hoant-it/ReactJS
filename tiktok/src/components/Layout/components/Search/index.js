@@ -8,6 +8,7 @@ import styles from './Search.module.scss';
 import AccountItem from '~/components/AccountItem';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { SearchIcon } from '~/components/Icons';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 function Search() {
@@ -16,12 +17,19 @@ function Search() {
   const [showResult, setShowResult] = useState(true);
   const [loading, setLoading] = useState(false);
 
+  //1: dau tien debounced nhan ''
+  const debounced = useDebounce(seachValue, 800);
+
+  const inputRef = useRef();
+
   useEffect(() => {
-    if (!seachValue.trim()) {
+    if (!debounced.trim()) {
       setSearchResult([]);
       return;
     }
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(seachValue)}&type=less`)
+    //http://portal.wacoal.com.vn/admin/MenuListLoadWeb/${encodeURIComponent(debounced)}
+    //
+    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
       .then((res) => res.json())
       .then((res) => {
         setSearchResult(res.data);
@@ -30,15 +38,7 @@ function Search() {
       .catch(() => {
         setLoading(false);
       });
-  }, [seachValue]);
-
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       setSearchResult([1, 2, 3]);
-  //     }, 0);
-  //   }, []);
-
-  const inputRef = useRef();
+  }, [debounced]);
 
   const handleClear = () => {
     setSearchValue('');
@@ -48,6 +48,13 @@ function Search() {
 
   const handleHideResult = () => {
     setShowResult(false);
+  };
+
+  const hanldeChange = (e) => {
+    const searchValue = e.target.value;
+    if (!seachValue.startsWith(' ')) {
+      setSearchValue(searchValue);
+    }
   };
 
   return (
@@ -60,6 +67,7 @@ function Search() {
             <h4 className={cx('search-title')}>Accounts</h4>
             {searchReult.map((result) => (
               <AccountItem key={result.id} data={result}></AccountItem>
+              // <AccountItem key={result.MenuCode} data={result}></AccountItem>
             ))}
           </PopperWrapper>
         </div>
@@ -71,7 +79,7 @@ function Search() {
           value={seachValue}
           placeholder="Search account and videos"
           spellCheck={false}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={hanldeChange}
           onFocus={() => setShowResult(true)}></input>
         {!!seachValue && !loading && (
           <button className={cx('clear')} onClick={() => handleClear()}>
@@ -81,7 +89,7 @@ function Search() {
 
         {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>}
 
-        <button className={cx('search-btn')}>
+        <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
           <SearchIcon></SearchIcon>
         </button>
       </div>
