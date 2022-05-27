@@ -3,6 +3,7 @@ import TippyHeadless from '@tippyjs/react/headless'; //tao tooltip
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState, useRef } from 'react';
 
+import * as searchServices from '~/apiServices/searchServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Search.module.scss';
 import AccountItem from '~/components/AccountItem';
@@ -27,17 +28,21 @@ function Search() {
       setSearchResult([]);
       return;
     }
+
     //http://portal.wacoal.com.vn/admin/MenuListLoadWeb/${encodeURIComponent(debounced)}
-    //
-    fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res.data);
+    //https://tiktok.fullstack.edu.vn/api/users/search
+    const fetchApi = async () => {
+      try {
+        setLoading(true);
+        const result = await searchServices.search(debounced);
+        setSearchResult(result);
         setLoading(false);
-      })
-      .catch(() => {
+      } catch (error) {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchApi();
   }, [debounced]);
 
   const handleClear = () => {
