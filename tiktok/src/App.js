@@ -1,7 +1,7 @@
 import { Fragment } from 'react'; //Fragment chi de chua
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
-import { DefaulLayout } from '~/components/Layout';
+import DefaultLayout from '~/layouts';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         <Routes>
           {publicRoutes.map((route, index) => {
-            let Layout = DefaulLayout;
+            let Layout = DefaultLayout;
             if (route.layout) {
               Layout = route.layout;
             } else if (route.layout === null) {

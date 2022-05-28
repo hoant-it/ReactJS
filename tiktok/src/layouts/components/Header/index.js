@@ -21,7 +21,7 @@ import Menu from '~/components/Popper/Menu';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search';
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -46,12 +46,12 @@ const MENU_ITEMS = [
   },
   {
     icon: <FontAwesomeIcon icon={faCircleQuestion}></FontAwesomeIcon>,
-    title: 'Feeback and help',
+    title: 'Feedback and help',
     to: '/feedback',
   },
   {
     icon: <FontAwesomeIcon icon={faKeyboard}></FontAwesomeIcon>,
-    title: 'Keybard Shortcuts',
+    title: 'Keyboard Shortcuts',
   },
 ];
 
@@ -98,7 +98,7 @@ function Header() {
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
         <div className={cx('logo')}>
-          <Link to={routesConfig.home} className={cx('logo-link')}>
+          <Link to={config.routes.home} className={cx('logo-link')}>
             <img src={images.logo} alt="tiktok"></img>
           </Link>
         </div>

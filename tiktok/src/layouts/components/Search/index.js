@@ -3,7 +3,7 @@ import TippyHeadless from '@tippyjs/react/headless'; //tao tooltip
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState, useRef } from 'react';
 
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import styles from './Search.module.scss';
 import AccountItem from '~/components/AccountItem';
