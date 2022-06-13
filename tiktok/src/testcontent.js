@@ -1,30 +1,23 @@
 import { useState, useEffect } from 'react';
 
 function Content() {
-  
-  const [title, setTitle] = useState('');
-  const [posts, setPosts] = useState([]);
+  const [countdown, setCountdown] = useState(180);
+
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts`)
-      .then((res) => res.json())
-      .then((posts) => {
-        setPosts(posts);
-      });
-  },[]);
+    const timer = setTimeout(() => {
+      setCountdown(countdown - 1);
+      console.log('timer run');
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+      console.log('timer clear');
+    };
+  }, [countdown]);
 
   return (
     <div>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="nhap vao di ban"
-          style={{ marginLeft: '5px' }}></input>
-
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <h1>{countdown}</h1>
     </div>
   );
 }

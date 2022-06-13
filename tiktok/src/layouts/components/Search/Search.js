@@ -15,26 +15,26 @@ const cx = classNames.bind(styles);
 function Search() {
   const [seachValue, setSearchValue] = useState('');
   const [searchReult, setSearchResult] = useState([]);
-  const [showResult, setShowResult] = useState(true);
+  const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
 
   //1: dau tien debounced nhan ''
-  const debounced = useDebounce(seachValue, 800);
+  const debouncedValue = useDebounce(seachValue, 800);
 
   const inputRef = useRef();
 
   useEffect(() => {
-    if (!debounced.trim()) {
+    if (!debouncedValue.trim()) {
       setSearchResult([]);
       return;
     }
 
-    //http://portal.wacoal.com.vn/admin/MenuListLoadWeb/${encodeURIComponent(debounced)}
+    //http://portal.wacoal.com.vn/admin/MenuListLoadWeb/${encodeURIComponent(debouncedValue)}
     //https://tiktok.fullstack.edu.vn/api/users/search
     const fetchApi = async () => {
       try {
         setLoading(true);
-        const result = await searchServices.search(debounced);
+        const result = await searchServices.search(debouncedValue);
         setSearchResult(result);
         setLoading(false);
       } catch (error) {
@@ -43,7 +43,7 @@ function Search() {
     };
 
     fetchApi();
-  }, [debounced]);
+  }, [debouncedValue]);
 
   const handleClear = () => {
     setSearchValue('');

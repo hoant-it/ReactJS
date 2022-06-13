@@ -1,4 +1,4 @@
-const rotes = {
+const routes = {
   home: '/',
   following: '/following',
   profile: '/@:nickname',
@@ -6,4 +6,4 @@ const rotes = {
   search: '/search',
 };
 
-export default rotes;
+export default routes;
