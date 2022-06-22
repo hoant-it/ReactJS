@@ -1,6 +1,8 @@
 .wrapper {
-  width: 356px;
+  position: fixed;
+  width: var(--default-layout-width-sidebar);
   padding: 20px 0 26px 8px;
+  // overflow-y: auto;
   // min-height: 1000px;
   // background-color: #333;
 }
