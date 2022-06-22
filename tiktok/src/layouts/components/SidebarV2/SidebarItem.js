@@ -2,13 +2,17 @@ import classNames from 'classnames/bind';
 import Styles from './Sidebar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faFolder } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MenuItem from './MenuItem';
 
 const cx = classNames.bind(Styles);
 
-function SidebarItem({ item }) {
-  const [open, setOpen] = useState(false);
+function SidebarItem({ item, expand }) {
+  const [open, setOpen] = useState(true);
+  useEffect(() => {
+    setOpen(expand);
+  }, [expand]);
+
   if (item.childrens) {
     return (
       <div className={cx(open ? 'sidebar-item-open' : 'sidebar-item')}>
@@ -25,7 +29,7 @@ function SidebarItem({ item }) {
         </div>
         <div className={cx('sidebar-content')}>
           {item.childrens.map((child, index) => (
-            <SidebarItem key={index} item={child}></SidebarItem>
+            <SidebarItem key={index} item={child} expand={expand}></SidebarItem>
           ))}
         </div>
       </div>

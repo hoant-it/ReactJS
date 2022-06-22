@@ -25,8 +25,40 @@
   //   background-color: #ccc;
 }
 
+.logo {
+  width: var(--default-layout-width-sidebar);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .logo-link {
   display: flex;
+}
+.action-left {
+  display: flex;
+  margin-right: 5px;
+}
+
+.toggle-btn {
+  position: relative;
+  display: flex;
+  font-size: 2.2rem;
+  color: #161823;
+  background-color: transparent;
+  // margin-right: 10px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.expand-btn {
+  position: relative;
+  display: flex;
+  font-size: 2.2rem;
+  color: #161823;
+  background-color: transparent;
+  // margin-right: 10px;
+  padding: 4px 12px;
+  cursor: pointer;
 }
 
 //Action
