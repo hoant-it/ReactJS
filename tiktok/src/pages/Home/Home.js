@@ -5,7 +5,7 @@ function Home() {
   const [userList, getUserList] = useState([]);
   useEffect(() => {
     axios.get('http://localhost:4444/api').then((result) => {
-      console.log(result.data.data);
+      // console.log(result.data.data);
       getUserList(result.data.data);
     });
   }, []);

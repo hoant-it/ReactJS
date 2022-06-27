@@ -13,7 +13,9 @@ function DefaultLayout({ children }) {
     setToggle(!toggle);
   };
 
-  const [expand, setExpand] = useState(true);
+  // console.log(window.localStorage.getItem('expand'))
+
+  const [expand, setExpand] = useState(false);
   const handleExpand = () => {
     setExpand(!expand);
   };

@@ -11,7 +11,7 @@
       {
         "title": "following",
         "icon": "bi-info-circle-fill",
-        "path": "/following"
+        "path": "/followinga"
       },
       {
         "title": "Contact",
@@ -121,6 +121,6 @@
   {
     "title": "Report Bug",
     "icon": "bi-bug",
-    "path": "/report-bug"
+    "path": "/following"
   }
 ]
