@@ -8,7 +8,6 @@ import {
   faCoins,
   faEarthAsia,
   faEllipsisVertical,
-  faExpand,
   faGear,
   faKeyboard,
   faSignOut,
@@ -26,7 +25,9 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search/Search';
 import config from '~/config';
-import { useState } from 'react';
+import { useContext } from 'react';
+
+import { ExpandContext } from '~/context/ExpandContext';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -60,7 +61,9 @@ const MENU_ITEMS = [
   },
 ];
 
-function Header({ onToggle, onExpand, expand }) {
+function Header({ onToggle }) {
+  const context = useContext(ExpandContext);
+
   const currentUser = true;
 
   const userMenu = [
@@ -112,31 +115,22 @@ function Header({ onToggle, onExpand, expand }) {
                 <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
               </button>
             </Tippy>
-            {!expand ? (
+            {!context.expand ? (
               <Tippy delay={[0, 200]} content="Expand" placement="bottom" offset={[12, 8]}>
-                <button className={cx('expand-btn')} onClick={onExpand}>
+                <button className={cx('expand-btn')} onClick={context.handleExpand}>
                   <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                   {/* <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon> */}
                 </button>
               </Tippy>
             ) : (
               <Tippy delay={[0, 200]} content="Collapse" placement="bottom" offset={[12, 8]}>
-                <button className={cx('expand-btn')} onClick={onExpand}>
+                <button className={cx('expand-btn')} onClick={context.handleExpand}>
                   {/* <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon> */}
                   <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon>
                 </button>
               </Tippy>
             )}
-
-            {/* <Tippy delay={[0, 200]} content="Expand" placement="bottom" offset={[12, 8]}>
-              <button className={cx('expand-btn')} onClick={onExpand}>
-                {!expand ? (
-                  <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                ) : (
-                  <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon>
-                )}
-              </button>
-            </Tippy> */}
+  
           </div>
         </div>
         <Search></Search>

@@ -2,17 +2,21 @@ import classNames from 'classnames/bind';
 import Styles from './Sidebar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faFolder } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import MenuItem from './MenuItem';
+
+import { ExpandContext } from '~/context/ExpandContext'; 
 
 const cx = classNames.bind(Styles);
 const arrMenuStatus = JSON.parse(window.localStorage.getItem('statusMenu')) || [];
-function SidebarItem({ item, expand }) {
+function SidebarItem({ item }) {
+  const context = useContext(ExpandContext);
+
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    setOpen(expand);
-  }, [expand]);
+    setOpen(context.expand);
+  }, [context.expand]);
 
   const handleOpenSidebarItem = (event) => {
     // console.log(event.target.id);
@@ -48,7 +52,7 @@ function SidebarItem({ item, expand }) {
           </div>
           <div className={cx('sidebar-content')}>
             {item.childrens.map((child, index) => (
-              <SidebarItem key={index} item={child} expand={expand}></SidebarItem>
+              <SidebarItem key={index} item={child}></SidebarItem>
             ))}
           </div>
         </div>
@@ -69,7 +73,7 @@ function SidebarItem({ item, expand }) {
           </div>
           <div className={cx('sidebar-content')}>
             {item.childrens.map((child, index) => (
-              <SidebarItem key={index} item={child} expand={expand}></SidebarItem>
+              <SidebarItem key={index} item={child}></SidebarItem>
             ))}
           </div>
         </div>

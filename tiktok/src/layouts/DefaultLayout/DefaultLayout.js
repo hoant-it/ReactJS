@@ -3,9 +3,11 @@ import classNames from 'classnames/bind';
 import Header from '../components/Header';
 import Sidebar from '../components/SidebarV2';
 import styles from './DefaultLayout.module.scss';
-import { memo, useState } from 'react';
+import { memo, useState, createContext } from 'react';
 
 const cx = classNames.bind(styles);
+
+export const expandContext = createContext();
 
 function DefaultLayout({ children }) {
   const [toggle, setToggle] = useState(true);
@@ -13,22 +15,15 @@ function DefaultLayout({ children }) {
     setToggle(!toggle);
   };
 
-  // console.log(window.localStorage.getItem('expand'))
-
-  const [expand, setExpand] = useState(false);
-  const handleExpand = () => {
-    setExpand(!expand);
-  };
 
   return (
-    <div className={cx('wrapper')}>
-      <Header onToggle={handleToggle} onExpand={handleExpand} expand={expand} />
-      <div className={cx('container')}>
-        <Sidebar toggle={toggle} expand={expand} />
-
-        <div className={cx(toggle ? 'content' : 'content-full')}>{children}</div>
+      <div className={cx('wrapper')}>
+        <Header onToggle={handleToggle} />
+        <div className={cx('container')}>
+          <Sidebar toggle={toggle} />
+          <div className={cx(toggle ? 'content' : 'content-full')}>{children}</div>
+        </div>
       </div>
-    </div>
   );
 }
 DefaultLayout.prototype = {

@@ -6,7 +6,7 @@ import { useRef, memo, useLayoutEffect } from 'react';
 
 const cx = classNames.bind(Styles);
 
-function Sidebar({ toggle, expand }) {
+function Sidebar({ toggle }) {
   let top = useRef();
 
   useLayoutEffect(() => {
@@ -20,7 +20,7 @@ function Sidebar({ toggle, expand }) {
   return (
     <div className={cx(toggle ? 'sidebar' : 'sidebar-hide')} id={'sidebar'} ref={top} onScroll={handleScroll}>
       {Items.map((item, index) => (
-        <SidebarItem key={index} {...item} item={item} expand={expand}></SidebarItem>
+        <SidebarItem key={index} {...item} item={item} ></SidebarItem>
       ))}
     </div>
   );

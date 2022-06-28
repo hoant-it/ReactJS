@@ -4,8 +4,8 @@
   width: var(--default-layout-width-sidebar);
   padding: 20px 20px 20px 0px;
   overflow-y: overlay;
-  max-height: min((100vh - 96px) - 60px);
-  min-height: 100px;
+  max-height: min(100vh  - 60px);
+  min-height: min(100vh  - 60px);
   border: 1px solid transparent;
   border-color: 1px solid rgba(22, 24, 35, 0.12);
   background-color: whitesmoke;
