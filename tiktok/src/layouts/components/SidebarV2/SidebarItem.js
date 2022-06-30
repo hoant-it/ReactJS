@@ -5,12 +5,12 @@ import { faChevronDown, faFolder } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState, useContext } from 'react';
 import MenuItem from './MenuItem';
 
-import { ExpandContext } from '~/context/ExpandContext'; 
+import { Context } from '~/context/Context';
 
 const cx = classNames.bind(Styles);
-const arrMenuStatus = JSON.parse(window.localStorage.getItem('statusMenu')) || [];
+const arrMenuStatus = JSON.parse(window.localStorage.getItem('statusMenu')) || [{ id: 'MN00039', status: true }];
 function SidebarItem({ item }) {
-  const context = useContext(ExpandContext);
+  const context = useContext(Context);
 
   const [open, setOpen] = useState(true);
 
@@ -19,32 +19,34 @@ function SidebarItem({ item }) {
   }, [context.expand]);
 
   const handleOpenSidebarItem = (event) => {
-    // console.log(event.target.id);
-    // arrMenuStatus = JSON.parse(window.localStorage.getItem('statusMenu'));
-    let objIndex = arrMenuStatus.findIndex((obj) => obj.id === event.target.id);
+    let id = event.target.id;
+    let objIndex = arrMenuStatus.findIndex((obj) => obj.id === id);
     if (objIndex >= 0) {
       arrMenuStatus[objIndex].status = !arrMenuStatus[objIndex].status;
     } else {
       let objMenuStatus = {};
-      objMenuStatus.id = event.target.id;
-      objMenuStatus.status = !open;
-      arrMenuStatus.push(objMenuStatus);
+      if (id !== '') {
+        objMenuStatus.id = id;
+        objMenuStatus.status = !open;
+        arrMenuStatus.push(objMenuStatus);
+      }
     }
     setOpen(!open);
     window.localStorage.setItem('statusMenu', JSON.stringify(arrMenuStatus));
   };
 
   if (item.childrens) {
-    let objIndex = arrMenuStatus.findIndex((obj) => obj.id === item.title);
+    let objIndex = arrMenuStatus.findIndex((obj) => obj.id === item.id);
     if (objIndex >= 0) {
       return (
         <div className={cx(arrMenuStatus[objIndex].status ? 'sidebar-item-open' : 'sidebar-item')}>
-          <div className={cx('sidebar-title')} id={item.title} onClick={handleOpenSidebarItem}>
-            <span>
+          <div className={cx('sidebar-title')} onClick={handleOpenSidebarItem} id={item.id}>
+            <span id={item.id}>
               <FontAwesomeIcon icon={faFolder} className={cx('icon')}></FontAwesomeIcon>
               {item.title}
             </span>
             <FontAwesomeIcon
+              id={item.id}
               icon={faChevronDown}
               className={cx('toggle-btn')}
               // onClick={() => setOpen(!open)}
@@ -60,12 +62,13 @@ function SidebarItem({ item }) {
     } else {
       return (
         <div className={cx(open ? 'sidebar-item-open' : 'sidebar-item')}>
-          <div className={cx('sidebar-title')} id={item.title} onClick={handleOpenSidebarItem}>
-            <span>
+          <div className={cx('sidebar-title')} id={item.id} onClick={handleOpenSidebarItem}>
+            <span id={item.id}>
               <FontAwesomeIcon icon={faFolder} className={cx('icon')}></FontAwesomeIcon>
               {item.title}
             </span>
             <FontAwesomeIcon
+              id={item.id}
               icon={faChevronDown}
               className={cx('toggle-btn')}
               // onClick={() => setOpen(!open)}
@@ -82,35 +85,6 @@ function SidebarItem({ item }) {
   } else {
     return <MenuItem title={item.title} to={item.path || ''} icon={null}></MenuItem>;
   }
-
-  //   return (
-  //     <div className={cx(open ? 'sidebar-item-open' : 'sidebar-item')}>
-  //       <div className={cx('sidebar-title')} id={item.title} onClick={handleOpenSidebarItem}>
-  //         <span>
-  //           <FontAwesomeIcon icon={faFolder} className={cx('icon')}></FontAwesomeIcon>
-  //           {item.title}
-  //         </span>
-  //         <FontAwesomeIcon
-  //           icon={faChevronDown}
-  //           className={cx('toggle-btn')}
-  //           // onClick={() => setOpen(!open)}
-  //         ></FontAwesomeIcon>
-  //       </div>
-  //       <div className={cx('sidebar-content')}>
-  //         {item.childrens.map((child, index) => (
-  //           <SidebarItem key={index} item={child} expand={expand}></SidebarItem>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-  // } else {
-  //   return (
-  //     <MenuItem title={item.title} to={item.path || ''} icon={null}></MenuItem>
-  //     // <a href={item.path || '#'} className={cx('sidebar-item')}>
-  //     //   <span>{item.title}</span>
-  //     // </a>
-  //   );
-  // }
 }
 
 export default SidebarItem;

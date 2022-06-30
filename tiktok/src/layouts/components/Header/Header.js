@@ -27,7 +27,7 @@ import Search from '../Search/Search';
 import config from '~/config';
 import { useContext } from 'react';
 
-import { ExpandContext } from '~/context/ExpandContext';
+import { Context } from '~/context/Context';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -62,7 +62,7 @@ const MENU_ITEMS = [
 ];
 
 function Header({ onToggle }) {
-  const context = useContext(ExpandContext);
+  const context = useContext(Context);
 
   const currentUser = true;
 
