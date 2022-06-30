@@ -2,6 +2,7 @@ import { Fragment } from 'react'; //Fragment chi de chua
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from '~/routes';
 import DefaultLayout from '~/layouts';
+import 'devextreme/dist/css/dx.light.css';
 
 function App() {
   return (
