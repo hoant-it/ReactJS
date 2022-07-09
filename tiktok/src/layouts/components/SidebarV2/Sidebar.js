@@ -5,7 +5,6 @@ import SidebarItem from './SidebarItem';
 
 import { Context } from '~/context/Context';
 
-
 import * as MainServices from '~/services/main/MainServices';
 
 const cx = classNames.bind(Styles);
@@ -24,7 +23,7 @@ function Sidebar({ toggle }) {
   }, []);
 
   useEffect(() => {
-    console.log('useEffect render');
+    // console.log('useEffect render');
     const scrollTopDefault = JSON.parse(window.localStorage.getItem('scrollTop'));
     top.current.scrollTop = scrollTopDefault || 0;
   }, [items]);

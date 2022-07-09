@@ -1,3 +1,9 @@
+button,
+input,
+[tabindex] {
+  outline: none;
+  border: none;
+}
 .wrapper {
   --search-border-radius: 92px;
   --search-height: 46px;

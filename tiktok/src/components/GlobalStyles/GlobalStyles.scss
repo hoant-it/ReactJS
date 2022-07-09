@@ -51,12 +51,14 @@ html *::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0);
 }
 
-button,
-input,
-[tabindex] {
-  outline: none;
-  border: none;
-}
+// button,
+// input,
+// [tabindex] {
+//   outline: none;
+//   border: none;
+// }
+
+
 
 a {
   color: var(--text-color);

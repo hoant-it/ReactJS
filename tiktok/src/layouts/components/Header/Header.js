@@ -2,8 +2,8 @@ import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
-  faChevronDown,
-  faChevronUp,
+  // faChevronDown,
+  // faChevronUp,
   faCircleQuestion,
   faCoins,
   faEarthAsia,
@@ -25,9 +25,9 @@ import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
 import Image from '~/components/Image';
 import Search from '../Search/Search';
 import config from '~/config';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 
-import { Context } from '~/context/Context';
+// import { Context } from '~/context/Context';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -62,7 +62,7 @@ const MENU_ITEMS = [
 ];
 
 function Header({ onToggle }) {
-  const context = useContext(Context);
+  // const context = useContext(Context);
 
   const currentUser = true;
 
@@ -115,22 +115,24 @@ function Header({ onToggle }) {
                 <FontAwesomeIcon icon={faBars}></FontAwesomeIcon>
               </button>
             </Tippy>
+            {/* bo hieu ung expan all
+
             {!context.expand ? (
               <Tippy delay={[0, 200]} content="Expand" placement="bottom" offset={[12, 8]}>
                 <button className={cx('expand-btn')} onClick={context.handleExpand}>
                   <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
-                  {/* <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon> */}
+             
                 </button>
               </Tippy>
             ) : (
               <Tippy delay={[0, 200]} content="Collapse" placement="bottom" offset={[12, 8]}>
                 <button className={cx('expand-btn')} onClick={context.handleExpand}>
-                  {/* <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon> */}
+              
                   <FontAwesomeIcon icon={faChevronUp}></FontAwesomeIcon>
                 </button>
               </Tippy>
             )}
-  
+            */}
           </div>
         </div>
         <Search></Search>
